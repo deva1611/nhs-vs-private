@@ -1,0 +1,142 @@
+{
+  "procedures": [
+    {
+      "id": "knee_replacement",
+      "name": "Knee Replacement",
+      "keywords": ["knee", "knee replacement", "total knee"],
+      "nhs_specialty": "Trauma and Orthopaedics",
+      "nhs_avg_wait_weeks": 38,
+      "private_cost_min": 11000,
+      "private_cost_max": 17000,
+      "private_providers": ["Spire Healthcare", "Nuffield Health", "Circle Health"],
+      "abroad": [
+        {"country": "Poland", "city": "Warsaw", "cost": 6500, "quality": "EU Accredited"},
+        {"country": "Hungary", "city": "Budapest", "cost": 5800, "quality": "EU Accredited"},
+        {"country": "Turkey", "city": "Istanbul", "cost": 4500, "quality": "JCI Accredited"}
+      ],
+      "suitable_for_abroad": true
+    },
+    {
+      "id": "hip_replacement",
+      "name": "Hip Replacement",
+      "keywords": ["hip", "hip replacement", "total hip"],
+      "nhs_specialty": "Trauma and Orthopaedics",
+      "nhs_avg_wait_weeks": 40,
+      "private_cost_min": 12000,
+      "private_cost_max": 18000,
+      "private_providers": ["Spire Healthcare", "Nuffield Health", "Circle Health"],
+      "abroad": [
+        {"country": "Poland", "city": "Warsaw", "cost": 7000, "quality": "EU Accredited"},
+        {"country": "Hungary", "city": "Budapest", "cost": 6200, "quality": "EU Accredited"},
+        {"country": "Turkey", "city": "Istanbul", "cost": 5000, "quality": "JCI Accredited"}
+      ],
+      "suitable_for_abroad": true
+    },
+    {
+      "id": "mri_scan",
+      "name": "MRI Scan",
+      "keywords": ["mri", "mri scan", "magnetic resonance"],
+      "nhs_specialty": "Diagnostic Imaging",
+      "nhs_avg_wait_weeks": 12,
+      "private_cost_min": 350,
+      "private_cost_max": 800,
+      "private_providers": ["Nuffield Health", "Alliance Medical", "InHealth"],
+      "abroad": [],
+      "suitable_for_abroad": false
+    },
+    {
+      "id": "cataract_surgery",
+      "name": "Cataract Surgery",
+      "keywords": ["cataract", "eye surgery", "cataract surgery"],
+      "nhs_specialty": "Ophthalmology",
+      "nhs_avg_wait_weeks": 20,
+      "private_cost_min": 2000,
+      "private_cost_max": 4000,
+      "private_providers": ["Spire Healthcare", "Optical Express", "Nuffield Health"],
+      "abroad": [
+        {"country": "Hungary", "city": "Budapest", "cost": 1200, "quality": "EU Accredited"},
+        {"country": "Turkey", "city": "Istanbul", "cost": 900, "quality": "JCI Accredited"}
+      ],
+      "suitable_for_abroad": true
+    },
+    {
+      "id": "hernia_repair",
+      "name": "Hernia Repair",
+      "keywords": ["hernia", "hernia repair", "inguinal hernia"],
+      "nhs_specialty": "General Surgery",
+      "nhs_avg_wait_weeks": 24,
+      "private_cost_min": 3000,
+      "private_cost_max": 6000,
+      "private_providers": ["Spire Healthcare", "Nuffield Health", "BMI Healthcare"],
+      "abroad": [
+        {"country": "Poland", "city": "Krakow", "cost": 2000, "quality": "EU Accredited"},
+        {"country": "Hungary", "city": "Budapest", "cost": 1800, "quality": "EU Accredited"}
+      ],
+      "suitable_for_abroad": true
+    },
+    {
+      "id": "colonoscopy",
+      "name": "Colonoscopy",
+      "keywords": ["colonoscopy", "colon", "bowel examination"],
+      "nhs_specialty": "Gastroenterology",
+      "nhs_avg_wait_weeks": 10,
+      "private_cost_min": 1500,
+      "private_cost_max": 3000,
+      "private_providers": ["Spire Healthcare", "Nuffield Health", "Circle Health"],
+      "abroad": [],
+      "suitable_for_abroad": false
+    },
+    {
+      "id": "carpal_tunnel",
+      "name": "Carpal Tunnel Surgery",
+      "keywords": ["carpal tunnel", "carpal", "wrist surgery"],
+      "nhs_specialty": "Trauma and Orthopaedics",
+      "nhs_avg_wait_weeks": 18,
+      "private_cost_min": 1500,
+      "private_cost_max": 3500,
+      "private_providers": ["Spire Healthcare", "Nuffield Health", "BMI Healthcare"],
+      "abroad": [
+        {"country": "Poland", "city": "Warsaw", "cost": 900, "quality": "EU Accredited"}
+      ],
+      "suitable_for_abroad": true
+    },
+    {
+      "id": "tonsil_removal",
+      "name": "Tonsil Removal (Tonsillectomy)",
+      "keywords": ["tonsil", "tonsillectomy", "tonsil removal"],
+      "nhs_specialty": "Ear Nose and Throat",
+      "nhs_avg_wait_weeks": 22,
+      "private_cost_min": 2500,
+      "private_cost_max": 5000,
+      "private_providers": ["Spire Healthcare", "Nuffield Health", "Circle Health"],
+      "abroad": [
+        {"country": "Hungary", "city": "Budapest", "cost": 1500, "quality": "EU Accredited"}
+      ],
+      "suitable_for_abroad": true
+    },
+    {
+      "id": "physiotherapy",
+      "name": "Physiotherapy",
+      "keywords": ["physio", "physiotherapy", "physical therapy"],
+      "nhs_specialty": "Physiotherapy",
+      "nhs_avg_wait_weeks": 8,
+      "private_cost_min": 50,
+      "private_cost_max": 120,
+      "private_providers": ["Nuffield Health", "Pure Physio", "Physiocure"],
+      "abroad": [],
+      "suitable_for_abroad": false
+    },
+    {
+      "id": "dermatology",
+      "name": "Dermatology Consultation",
+      "keywords": ["dermatology", "skin", "dermatologist", "skin condition"],
+      "nhs_specialty": "Dermatology",
+      "nhs_avg_wait_weeks": 16,
+      "private_cost_min": 200,
+      "private_cost_max": 500,
+      "private_providers": ["Spire Healthcare", "The Dermatology Clinic", "Nuffield Health"],
+      "abroad": [],
+      "suitable_for_abroad": false
+    }
+  ]
+}
