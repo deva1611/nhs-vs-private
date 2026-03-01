@@ -1,0 +1,15 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated report files
+*.txt
+!requirements.txt
+
+# Environment files
+.env
+venv/
+
+# VS Code settings
+.vscode/
