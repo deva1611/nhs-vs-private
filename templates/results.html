@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Report | NHS vs Private</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>🏥 NHS vs Private</h1>
+            <p>UK Healthcare Decision Engine</p>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Summary Bar -->
+        <div class="summary-bar">
+            <span><strong>Procedure:</strong> {{ procedure.name }}</span>
+            <span><strong>Waited:</strong> {{ wait_data.display }}</span>
+            <span><strong>Budget:</strong> £{{ "{:,}".format(budget_data.user_budget) }}</span>
+        </div>
+
+        <!-- Recommendation Banner -->
+        <div class="recommendation-banner urgency-{{ urgency_data.urgency | lower }}">
+            <h2>{{ recommendation.primary }}</h2>
+            {% for rec in recommendation.recommendations %}
+            <p>{{ loop.index }}. {{ rec }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- Three Option Cards -->
+        <div class="options-grid">
+
+            <!-- NHS Card -->
+            <div class="option-card nhs-card">
+                <div class="card-header">
+                    <h3>🏥 NHS</h3>
+                    <span class="price-tag free">FREE</span>
+                </div>
+                <div class="card-body">
+                    <div class="stat">
+                        <span class="stat-label">Average wait</span>
+                        <span class="stat-value">{{ procedure.nhs_avg_wait_weeks }} weeks</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">You have waited</span>
+                        <span class="stat-value">{{ wait_data.display }}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Estimated remaining</span>
+                        <span class="stat-value">~{{ urgency_data.weeks_remaining }} weeks</span>
+                    </div>
+                    <div class="urgency-badge urgency-{{ urgency_data.urgency | lower }}">
+                        {{ urgency_data.urgency }} URGENCY
+                    </div>
+                    <p class="urgency-reason">{{ urgency_data.urgency_reason }}</p>
+                </div>
+            </div>
+
+            <!-- Private Card -->
+            <div class="option-card private-card">
+                <div class="card-header">
+                    <h3>💼 Private (UK)</h3>
+                    <span class="price-tag">£{{ "{:,}".format(budget_data.min_cost) }} – £{{ "{:,}".format(budget_data.max_cost) }}</span>
+                </div>
+                <div class="card-body">
+                    <div class="stat">
+                        <span class="stat-label">Average cost</span>
+                        <span class="stat-value">£{{ "{:,}".format(budget_data.avg_cost | int) }}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Typical wait</span>
+                        <span class="stat-value">2–4 weeks</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Your budget</span>
+                        <span class="stat-value">£{{ "{:,}".format(budget_data.user_budget) }}</span>
+                    </div>
+                    <div class="budget-status {{ budget_data.status | lower }}">
+                        {{ budget_data.status.replace('_', ' ') }}
+                    </div>
+                    <p>{{ budget_data.message }}</p>
+
+                    <!-- Finance Options -->
+                    <div class="finance-section">
+                        <h4>Finance Options (9.9% APR)</h4>
+                        {% for plan in budget_data.finance_options %}
+                        <div class="finance-row">
+                            <span>{{ plan.months }} months</span>
+                            <span>£{{ "%.2f"|format(plan.monthly_payment) }}/month</span>
+                            <span>Total: £{{ "{:,}".format(plan.total_repayable | int) }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Abroad Card -->
+            {% if abroad_option %}
+            <div class="option-card abroad-card">
+                <div class="card-header">
+                    <h3>✈️ Medical Tourism</h3>
+                    <span class="price-tag saving">Save £{{ "{:,}".format((budget_data.avg_cost - abroad_option.cost) | int) }}</span>
+                </div>
+                <div class="card-body">
+                    {% for option in procedure.abroad %}
+                    <div class="abroad-option">
+                        <div class="stat">
+                            <span class="stat-label">{{ option.country }} ({{ option.city }})</span>
+                            <span class="stat-value">£{{ "{:,}".format(option.cost) }}</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Quality</span>
+                            <span class="stat-value">{{ option.quality }}</span>
+                        </div>
+                        <div class="saving-tag">
+                            Saves £{{ "{:,}".format((budget_data.avg_cost - option.cost) | int) }} vs UK private
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <p class="abroad-note">* Costs are estimates including flights. Always verify with the provider.</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="option-card abroad-card disabled">
+                <div class="card-header">
+                    <h3>✈️ Medical Tourism</h3>
+                </div>
+                <div class="card-body">
+                    <p>Medical tourism is not recommended for this procedure.</p>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- Back Button -->
+        <div class="back-btn-container">
+            <a href="/" class="back-btn">← Start Again</a>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <p>⚠️ This tool provides general guidance only and is not medical or financial advice. Always consult a qualified professional before making healthcare decisions.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Free to use. No data collected. Not medical advice. Built with NHS England open data.</p>
+    </footer>
+
+</body>
+</html>
