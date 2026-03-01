@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHS vs Private | UK Healthcare Decision Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>🏥 NHS vs Private</h1>
+            <p>UK Healthcare Decision Engine</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h2>Should you wait on the NHS, go private, or explore medical tourism?</h2>
+            <p>Answer 3 simple questions and get a free, honest, data-driven recommendation.</p>
+        </div>
+
+        <!-- Show errors if any -->
+        {% if errors %}
+        <div class="errors">
+            {% for error in errors %}
+            <p>⚠️ {{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- The form -->
+        <div class="form-card">
+            <form action="/results" method="POST">
+
+                <div class="form-group">
+                    <label for="procedure">What procedure do you need?</label>
+                    <input
+                        type="text"
+                        id="procedure"
+                        name="procedure"
+                        placeholder="e.g. knee replacement, MRI scan, cataract surgery"
+                        required
+                    >
+                    <small>Available: {{ procedures | join(', ') }}</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="wait_time">How long have you already been waiting?</label>
+                    <input
+                        type="text"
+                        id="wait_time"
+                        name="wait_time"
+                        placeholder="e.g. 3 days, 2 weeks, 4 months"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="budget">What is your budget for private treatment? (£)</label>
+                    <input
+                        type="number"
+                        id="budget"
+                        name="budget"
+                        placeholder="e.g. 5000 (enter 0 if no budget)"
+                        min="0"
+                        required
+                    >
+                </div>
+
+                <button type="submit">Get My Free Report →</button>
+
+            </form>
+        </div>
+
+        <!-- Info cards -->
+        <div class="info-cards">
+            <div class="card">
+                <h3>🏥 NHS</h3>
+                <p>See exactly where you are in the queue and how long you really have left to wait.</p>
+            </div>
+            <div class="card">
+                <h3>💼 Private</h3>
+                <p>Get real cost ranges, finance options, and nearest private providers to you.</p>
+            </div>
+            <div class="card">
+                <h3>✈️ Abroad</h3>
+                <p>Compare EU-accredited medical tourism options that could save thousands.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Free to use. No data collected. Not medical advice.</p>
+        <p>Built with NHS England open data.</p>
+    </footer>
+
+</body>
+</html>
