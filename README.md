@@ -1,4 +1,6 @@
 # 🏥 NHS vs Private: UK Healthcare Decision Engine
+
+[![CI](https://github.com/deva1611/nhs-vs-private/actions/workflows/ci.yml/badge.svg)](https://github.com/deva1611/nhs-vs-private/actions/workflows/ci.yml)
 🌐 **Live Demo: [https://nhs-vs-private.onrender.com](https://nhs-vs-private.onrender.com)**
 A free, open-source Python tool that helps UK residents make an **informed, data-driven decision** about whether to wait on the NHS, go private, or explore medical tourism — based on their real situation.
 
