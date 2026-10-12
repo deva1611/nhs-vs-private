@@ -1,10 +1,12 @@
 # 🏥 NHS vs Private: UK Healthcare Decision Engine
 
 [![CI](https://github.com/deva1611/nhs-vs-private/actions/workflows/ci.yml/badge.svg)](https://github.com/deva1611/nhs-vs-private/actions/workflows/ci.yml)
-🌐 **Live Demo: [https://nhs-vs-private.onrender.com](https://nhs-vs-private.onrender.com)**
-A free, open-source Python tool that helps UK residents make an **informed, data-driven decision** about whether to wait on the NHS, go private, or explore medical tourism — based on their real situation.
 
-> **7 million people** are currently on NHS waiting lists. Every one of them faces the same question with no honest, free tool to help them answer it. This is that tool.
+🌐 **Live demo: [nhs-vs-private.onrender.com](https://nhs-vs-private.onrender.com)** (free hosting, so the first load can take up to a minute while it wakes up)
+
+A free, open-source Python tool that helps UK residents make an informed decision about whether to wait on the NHS, go private, or look at treatment abroad, based on their own situation.
+
+> Around 7 million cases are on the NHS waiting list in England. Everyone on it faces the same question, and there is no honest, free tool to help them answer it. This is that tool.
 
 ---
 
@@ -15,23 +17,25 @@ You answer 3 questions:
 2. How long have you already been waiting?
 3. What is your budget?
 
-The tool gives you a **complete, transparent report** covering:
+The tool gives you a clear, transparent report covering:
 
 - Your NHS waiting position and estimated time remaining
-- Private UK costs with full finance breakdown (monthly payments, total repayable, interest)
-- Medical tourism options where applicable (Poland, Hungary, Turkey)
-- A plain English recommendation based on your specific situation
+- Private UK costs with a full finance breakdown (monthly payments, total repayable, interest)
+- Treatment abroad options where suitable (Poland, Hungary, Turkey)
+- A plain English recommendation based on your answers
+
+It runs two ways: as a **Flask web app** (the live demo) or as a **command-line tool**.
 
 ---
 
 ## 💡 Why This Exists
 
-Every existing "comparison" tool is either:
+Most existing "comparison" tools are one of these:
 - A commercial site pushing private health insurance
 - A basic NHS page with no cost context
-- A form that collects your data and calls you
+- A form that collects your details so someone can call you
 
-This tool is **fully offline, fully transparent, and completely free**. No data collected. No calls. No sales pitch.
+This tool is free and transparent. It has no accounts, no database and no sales pitch. Nothing you enter is stored. The command-line version runs entirely offline on your own machine.
 
 ---
 
@@ -39,22 +43,34 @@ This tool is **fully offline, fully transparent, and completely free**. No data 
 
 ### Requirements
 - Python 3.8 or higher
-- No external libraries needed for core functionality
+- The command-line tool uses only the Python standard library
+- The web app needs Flask (installed from `requirements.txt`)
 
-### Installation
+### Run the web app locally
 
 ```bash
-git clone https://github.com/yourusername/nhs-vs-private.git
+git clone https://github.com/deva1611/nhs-vs-private.git
 cd nhs-vs-private
+pip install -r requirements.txt
+python app.py
+```
+
+Then open http://localhost:5000 in your browser.
+
+### Run the command-line version
+
+```bash
 python main.py
 ```
 
-### Running Tests
+### Run the tests
 
 ```bash
 pip install pytest
-pytest tests/test_modules.py -v
+pytest tests/ -v
 ```
+
+Tests also run automatically on every push through GitHub Actions.
 
 ---
 
@@ -72,6 +88,12 @@ pytest tests/test_modules.py -v
 | Tonsil Removal | 22 weeks | £2,500 – £5,000 |
 | Physiotherapy | 8 weeks | £50 – £120/session |
 | Dermatology Consultation | 16 weeks | £200 – £500 |
+
+### Where the figures come from
+
+All figures are indicative averages compiled in February 2026 and stored in `data/procedures.json`. NHS waits are based on NHS England Referral to Treatment (RTT) waiting time statistics. Private prices are typical self-pay ranges from published UK provider price lists. Treatment abroad prices are typical package prices from clinics in each country.
+
+Real costs and waits vary by hospital, region and individual case, and these figures will drift over time. Always get a direct quote before deciding.
 
 ---
 
@@ -116,7 +138,7 @@ pytest tests/test_modules.py -v
 
   1. Your urgency is high (32 weeks remaining) but your budget
      only partially covers private UK costs.
-  2. Hungary (Budapest) offers this at £5,800 — close to your
+  2. Hungary (Budapest) offers this at £5,800, close to your
      budget and at EU Accredited standards.
 
 ════════════════════════════════════════════════════════════
@@ -132,7 +154,10 @@ pytest tests/test_modules.py -v
 ```
 nhs-vs-private/
 │
-├── main.py                    ← Entry point
+├── app.py                     ← Flask web app (live demo)
+├── main.py                    ← Command-line entry point
+├── Procfile                   ← Render start command (gunicorn)
+├── requirements.txt
 ├── data/
 │   └── procedures.json        ← Procedure database
 ├── modules/
@@ -141,36 +166,40 @@ nhs-vs-private/
 │   ├── private_costs.py       ← Cost + finance calculator
 │   ├── recommendation.py      ← Decision engine
 │   └── report.py              ← Output formatter
+├── templates/                 ← HTML pages for the web app
+├── static/                    ← CSS and assets
 ├── tests/
-│   └── test_modules.py        ← Unit tests
-└── requirements.txt
+│   └── test_modules.py        ← Unit tests (pytest)
+├── .github/workflows/ci.yml   ← GitHub Actions CI
+└── LICENSE
 ```
 
 ---
 
 ## 🔮 Planned Features
 
-- [ ] Live NHS waiting time data via NHS England RTT API
+- [x] Web interface (Flask), deployed on Render
+- [x] Automated tests with GitHub Actions
+- [ ] Live NHS waiting time data via NHS England RTT data
 - [ ] Postcode-based nearest private provider lookup
 - [ ] Export report as PDF
-- [ ] Web interface (Flask)
 - [ ] More procedures (target: 50)
-- [ ] NHS e-Referral Trust comparison by specialty
+- [ ] NHS trust comparison by specialty
 
 ---
 
 ## 🤝 Contributing
 
-Contributions welcome. If you work in healthcare or have access to better cost data, please open a PR or issue. Accuracy matters here — real people use this.
+Contributions are welcome. If you work in healthcare or have access to better cost data, please open a PR or issue. Accuracy matters here because real people may use this.
 
 ---
 
 ## ⚠️ Disclaimer
 
-This tool provides general guidance only and is **not medical or financial advice**. Always consult a qualified medical professional and/or Independent Financial Adviser before making healthcare decisions.
+This tool provides general guidance only and is **not medical or financial advice**. Always consult a qualified medical professional and/or an Independent Financial Adviser before making healthcare decisions.
 
 ---
 
 ## 📄 Licence
 
-MIT Licence — free to use, share, and build on.
+MIT Licence. Free to use, share, and build on.
